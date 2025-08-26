@@ -1,0 +1,54 @@
+
+from pygame import mixer
+
+mixer.init()
+
+playlist = ["ano bando.mp3", "i cant sing a love song.mp3", "seisyun complex.mp3"]
+current = 0
+
+mixer.music.load(playlist[current])
+mixer.music.set_volume(0.7)
+mixer.music.play()
+
+is_paused = False
+
+
+# loop infinito
+while True:
+	print("Comandos: play, pause, rewind, stop, status, next, prev")
+
+	query = input(" ")
+
+	if query == "pause":
+		mixer.music.pause()
+		is_paused = True
+	elif query == "play":
+		mixer.music.unpause()
+		is_paused = False
+	elif query == "rewind":
+		mixer.music.rewind()
+	elif query == "stop":
+		mixer.music.stop()
+		break
+
+	elif query == "status":
+		if mixer.music.get_busy():
+			if is_paused:
+				print("Está en pausa")
+			else:
+				print("Esta reproduciendo")
+		else:
+			print("No hay música reproduciendo")
+
+	elif query == "next":
+		current = (current + 1) % len(playlist)
+		mixer.music.load(playlist[current])
+		mixer.music.play()
+		print(f"Siguiente -> {playlist[current]}")
+
+
+	elif query == "prev":
+		current = (current - 1) % len(playlist)
+		mixer.music.load(playlist[current])
+		mixer.music.play()
+		print(f"Anterior <- {playlist[current]}")
