@@ -21,7 +21,7 @@ root.iconphoto(True, icon_img)
 mixer.init()
 
 # --- Carpeta y playlist ---
-music_folder = os.path.expanduser("~/Música/bocchi")
+music_folder = os.path.expanduser("~/Música")
 playlist = [f for f in os.listdir(music_folder) if f.endswith(".mp3")]
 current = 0
 
